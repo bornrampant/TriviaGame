@@ -1,0 +1,54 @@
+body {
+    background-image: url("http://vignette3.wikia.nocookie.net/feshpince/images/5/50/Wiki-background/revision/latest?cb=20150823075630");
+    background-repeat: repeat-y;
+}
+#slider{
+	width: 720px;
+	height: 600px
+	overflow: hidden;
+}
+
+#slider .slides{
+	display: inline-block;
+	width: 6000px
+	height: 600px
+	margin: 2;
+	padding: 2;
+}
+
+#slider .slide{
+	float: left;
+	list-style-type: none;
+	width: 720px
+	height:600px;
+}
+
+h1{
+	color: #ffbf00;
+}
+
+/*html {
+  font-size: 14px;
+}*/
+
+@include media-breakpoint-up(sm) {
+  html {
+    font-size: 16px;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  html {
+    font-size: 20px;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  html {
+    font-size: 28px;
+  }
+}
+
+/*.main-container .header-container .header-content .logo {
+    background-image: url('//dw91iscgvb0p5.cloudfront.net/assets/data/295_d1c9b0bfb0c1888100a768160a1a9312.png');
+}*/
