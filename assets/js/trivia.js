@@ -10,37 +10,25 @@
 // On the final screen, show the number of correct answers, incorrect answers, and an option to restart the game (without reloading the page).
 
 //  -->
-
-window.onload = function() {
-
 var panel = $('#quiz-area'); // Panel to append all of the HTML to from this JS file
-var countStartNumber = 10; // Global var,
+var countStartNumber = 15; // Global var,
 
 // A function that handles events where one button is clicked
 // Start On Click Here
 
 $(document).on('click', '#start', function() {
-    game.startGame();
+   // game.startGame();
+   game.clicked(e)
+   console.log(this);
 
-	document.getElementById("qtrivia").innerHTML = questionsArray
-
-	// chosenWord = wordsList[Math.floor(Math.random() * wordsList.length)]; // solution is chosen randomly from wordList
-	// // neena
-	// lettersInChosenWord = chosenWord.split(""); // the word is broken into individual letters
-	// // ["n","e","e",'n','a']
-
-	// numBlanks = lettersInChosenWord.length; // we cound the number of letters in the word
-	// 5
-
-    console.log(this);
-})
+}); 
 
 // Submit On Click
 $(document).on('click', '.check-guess', function(e) {
-    game.checkGuess(e)
+     game.checkGuess(e)
     
-	console.log(this);
-})
+	console.log(e);
+});
 // Start Over On Click
 $(document).on('click', '#start-over', function() {
     location.reload()
@@ -55,53 +43,50 @@ game.checkGuess()
 //next button on click
 
 //random question; 4 choices
-var randomQuestion = Math.floor(Math.random()*(questionsArray));
-document.getElementById('qtrivia').innerHTML = questionsArray[randomQuestion]
+// var randomQuestion = Math.floor(Math.random()*(questionsArray));
+// document.getElementById('qtrivia').innerHTML = questionsArray[randomQuestion]
 var questionsArray = [{
 	question: "Which character from Beavis and Butthead got their own show?",
 	choices: ["Daria", "Hank Hill", "no one", "Beavis"],
 	correctChoice: "Daria"
-	}, {	
-		question: "In Fresh Prince of Bel-Air what was the butlers name?",
-		choices: ["Todd", "Jarvis", "Will", "Gefforey"],
-		correctChoice: "Gefforey"
-	}, {
-		question: "What is Doug's last name?",
-		choices: ["Folders", "Filbert", "Funzie", "Funnie"],
-		correctChoice: "Funnie"
-	}, {
-		question: "What kind of animal is Rocko (from Rocko's Modern Life)?",
-		choices: ["wallabe", "kangaroo", "dog", "catdog"],
-		correctChoice: "wallabe"
-	}, {	
-		question: "What's Ren's last name?",
-		choices: ["Hoeck", "Dog", "Chewie", "Simpson"],
-		correctChoice: "Hoeck"
-	}, {
-		question: "What do Pinky and the Brain try to do during every episode?",
-		choices: ["conquor the world", "eat cheese!", "dance!", "inhabit the cage"],
-		correctChoice: "conquor the world"
-	}, {
-		question: "In the Angry Beavers, which brother is named Norbert?",
-		choices: ["Is this a porno?", "The lighter one", "the darker one", "there is no one with that name, on that show"],
-		correctChoice: "The lighter one"
-	}, {
-		question: "What occupation do Courage's owners hold?",
-		choices: ["Is this a porno?", "Farmers", "the darker one", "there is no one with that name, on that show"],
-		correctChoice: "Farmers"
-	}, {	
-		question: "Who created the Powerpuff Girls?",
-		choices: ["Professor Plutonium", "Professor Utonium", "Professor Oak", "Tina Turner"],
-		correctChoice: "Professor Utonium"
+}, {	
+	question: "In Fresh Prince of Bel-Air what was the butlers name?",
+	choices: ["Todd", "Jarvis", "Will", "Gefforey"],
+	correctChoice: "Gefforey"
+}, {
+	question: "What is Doug's last name?",
+	choices: ["Folders", "Filbert", "Funzie", "Funnie"],
+	correctChoice: "Funnie"
+}, {
+	question: "What kind of animal is Rocko (from Rocko's Modern Life)?",
+	choices: ["wallabe", "kangaroo", "dog", "catdog"],
+	correctChoice: "wallabe"
+}, {	
+	question: "What's Ren's last name?",
+	choices: ["Hoeck", "Dog", "Chewie", "Simpson"],
+	correctChoice: "Hoeck"
+}, {
+	question: "What do Pinky and the Brain try to do during every episode?",
+	choices: ["conquor the world", "eat cheese!", "dance!", "inhabit the cage"],
+	correctChoice: "conquor the world"
+}, {
+	question: "In the Angry Beavers, which brother is named Norbert?",
+	choices: ["Is this a porno?", "The lighter one", "the darker one", "there is no one with that name, on that show"],
+	correctChoice: "The lighter one"
+}, {
+	question: "What occupation do Courage's owners hold?",
+	choices: ["Is this a porno?", "Farmers", "the darker one", "there is no one with that name, on that show"],
+	correctChoice: "Farmers"
+}, {	
+	question: "Who created the Powerpuff Girls?",
+	choices: ["Professor Plutonium", "Professor Utonium", "Professor Oak", "Tina Turner"],
+	correctChoice: "Professor Utonium"
 
-	}, {	
-		question: "What was Tommy's best friend name on the Rugrats",
-		choices: ["Chucky", "wallabe", "Richard", "Brock"],
-		correctChoice: "Chucky"
-	}]
-
-
-
+}, {	
+	question: "What was Tommy's best friend name on the Rugrats",
+	choices: ["Chucky", "wallabe", "Richard", "Brock"],
+	correctChoice: "Chucky"
+}]
 
 
 // Array of Questions
@@ -118,8 +103,7 @@ questionNumber++
 var game = {
 
     // Variables
-    questions: questionsArray, // Import QuestionsArray into the Game Object
-    questionNumber: 0,
+    questions: questionsArray, // Imports into the Game Object
     correctAnswers: 0,
     wrongAnswers: 0,
     unAnswered: 0,
@@ -127,39 +111,49 @@ var game = {
 
     // Functions
     countdown: function() {
-
-       timer = setInterval(game.countdown, 1000);
+        $('#counter-number').html(game.counter);
+        if (game.counter ===0){
+        console.log('Times Up')
+        game.timeUP();
+        }
+       // timer = setInterval(this.countdown, 1500);
+       // countStartNumber--
 
     },
 
     timeUp: function() {
-
+        clearInterval (timer)
         alert('Times Up!');
 
     },
 
-    // reset: function() {
-    // 	location.reload()
+    reset: function() {
+    	location.reload()
 
-    // },
+    },
 
-    checkGuess: function() {
+    checkGuess: function(e) {
+         if ($(e.target).data("name") === questions[this.currentQuestion].correctAnswer){
+          this.answeredCorrectly();
+        } else {
+          this.answeredIncorrectly();
+        }
 
-        // Is this the correct answer for the Question
+       // console.log(this.question[questionNumber].correctChoice)
 
-        // Yes
 
-        // No
+    },
 
-        // Is this the last Question?
+    finalResults: function() {
+
         if (this.questionNumber === questionsArray.length - 1) {
 
         function endGame(isWinner) {
-      		if (correctAnswers > wrongAnswers + unAnswered){
-        		alert('WINNER!');
-      }		
-      		else if( wrongAnswers + unAnswered > correctAnswers){
-        		alert('GAME OVER');
+            if (correctAnswers > wrongAnswers + unAnswered){
+                alert('WINNER!');
+      }     
+            else if( wrongAnswers + unAnswered > correctAnswers){
+                alert('GAME OVER');
       };
     }
 
@@ -167,11 +161,6 @@ var game = {
 
             // Continue Game
         }
-
-
-    },
-
-    finalResults: function() {
 
 
     },
@@ -206,49 +195,7 @@ var game = {
         }
 
     }
-}    
+   
 
-
-// var game = {
-// 	//variables
-// 	questionGuessTime: 10,
-// 	questionNumber: 0,
-// 	correctAnswers: 0,
-// 	wrongAnswers: 0,
-// 	unAnswered: 0,
-
-// 	//functions
-
-// 	timer: functon() {
-// 		timer = setInterval(game.countdown, 1000);
-// 	},
-
-// 	startGame: functon() {
-
-
-// 	},
-
-// 	reset: functon() {
-
-
-// 	},
-
-// 	checkGuess: functon() {
-
-// 		questionNumber++
-
-// 		if (this.questionNumber === questionsArray.length){
-
-// 		}
-
-// 	printQuestions: function(){
-
-// 	this.timer()
-
-// 	console.log(questionsArray[questionNumber].question)
-// 	console.log(questionsArray[questionNumber].choices[0])
-
-// 	}
-// }
 
 
