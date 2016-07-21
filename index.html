@@ -13,37 +13,51 @@ On the final screen, show the number of correct answers, incorrect answers, and 
 <html>
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="styles/reset.css">
+  <link rel="stylesheet" href="assets/css/reset.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="assets/css/style.css">
   <script src="https://use.fontawesome.com/a7ef4c2399.js"></script>
   <link href='https://fonts.googleapis.com/css?family=Amatica+SC:400,700' rel='stylesheet' type='text/css'>
 	<title>90's TV Trivia</title>
 </head>
 <body>
-	<div><a class="logo nav-tracking" href="" data-tracking="Home">
-	</a></div>
-		<div class ="container">
+	
+	<div class ="container">
 			<div class = "header">
-				<h1 class ="text-strong"> 90's Cartoon Trivia</h1>
-			</div>
-			<div id = "button">
-			<button onclick = "questionsArray()"><strong>???</strong></button>
-			<p id = "qtrivia"></p>
-<!-- 		<div id = "slider">
-			<ul class = "slides">
-				<li class="slide"><img src="img/slider1.jpg"/></li>
-				<li class="slide"><img src="img/slider2.jpg"/></li>
-				<li class="slide"><img src="img/slider3.jpg"/></li>
-				<li class="slide"><img src="img/slider4.jpg"/></li>
-			</ul>
-		</div>
+				<div class="jumbotron"><h1> 90's TV Trivia</h1></div>
+			</div>   
+			<div id="subwrapper">
+     			<div id="quiz-area">
+       				<button id="start"><h2><span class="glyphicon glyphicon-play"></span></h2></button>
+       				<button id="start-over"><h2><span class="glyphicon glyphicon-refresh"></span></h2></button>
+     			</div>
+   			</div>
+   	</div>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+<script type="text/javascript">
 
-		</div> -->
-			
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js">
+var panel = $('#quiz-area'); // Panel we will write and append all of the HTML to from this JS file
+var countStartNumber = 10; // Global variable,
 
-	questionNumber = 0;
+// This function handles events where one button is clicked
+// Start On Click
+$(document).on('click', '#start', function() {
+    game.loadQuestion();
+    console.log(this);
+})
+
+// Submit On Click
+$(document).on('click', '.check-guess', function(e) {
+    game.checkGuess(e)
+	console.log(this);
+})
+// Start Over On Click
+$(document).on('click', '#start-over', function() {
+    location.reload()
+    console.log(this);
+});
+
+// questionNumber = 0;
 
 //start on click
 //submit on click
@@ -54,35 +68,49 @@ game.checkGuess()
 var randomQuestion = Math.floor(Math.random()*(questionsArray));
 document.getElementById('qtrivia').innerHTML = questionsArray[randomQuestion]
 var questionsArray = [{
-	question: "Which character from beavis and Butthead has their own show?",
-	choices: ["1", "2", "3", "4"],
-	correctChoice: "2"
-}, {	
-	question: "In Fresh Prince of Bel-Air what was the butlers name?",
-	choices: ["", "", "", "Gefforey"],
-	correctChoice: ""
-}, {
-	question: "What is Doug's last name?",
-	choices: ["", "", "", "Funnie"],
-	correctChoice: ""
-}, {
-	question: "What kind of animal is Rocko (from Rocko's Modern Life)?",
-	choices: ["1", "2", "3", "4"],
-	correctChoice: "2"
-}, {	
-	question: "2nd question here",
-	choices: ["", "wallabe", "", ""],
-	correctChoice: ""
-}, {
-	question: "What do Pinky and the Brain try to do during every episode?",
-	choices: ["conquor the world", "", "", ""],
-	correctChoice: ""
+	question: "Which character from Beavis and Butthead got their own show?",
+	choices: ["Daria", "Hank Hill", "no one", "Beavis"],
+	correctChoice: "Daria"
+	}, {	
+		question: "In Fresh Prince of Bel-Air what was the butlers name?",
+		choices: ["Todd", "Jarvis", "Will", "Gefforey"],
+		correctChoice: "Gefforey"
+	}, {
+		question: "What is Doug's last name?",
+		choices: ["Folders", "Filbert", "Funzie", "Funnie"],
+		correctChoice: "Funnie"
+	}, {
+		question: "What kind of animal is Rocko (from Rocko's Modern Life)?",
+		choices: ["wallabe", "kangaroo", "dog", "catdog"],
+		correctChoice: "wallabe"
+	}, {	
+		question: "What's Ren's last name?",
+		choices: ["Hoeck", "Dog", "Chewie", "Simpson"],
+		correctChoice: "Hoeck"
+	}, {
+		question: "What do Pinky and the Brain try to do during every episode?",
+		choices: ["conquor the world", "eat cheese!", "dance!", "inhabit the cage"],
+		correctChoice: "conquor the world"
+	}, {
+		question: "In the Angry Beavers, which brother is named Norbert?",
+		choices: ["Is this a porno?", "The lighter one", "the darker one", "there is no one with that name, on that show"],
+		correctChoice: "The lighter one"
+	}, {
+		question: "What occupation do Courage's owners hold?",
+		choices: ["Is this a porno?", "Farmers", "the darker one", "there is no one with that name, on that show"],
+		correctChoice: "Farmers"
+	}, {	
+		question: "Who created the Powerpuff Girls?",
+		choices: ["Professor Plutonium", "Professor Utonium", "Professor Oak", "Tina Turner"],
+		correctChoice: "Professor Utonium"
 
-	// In the Angry Beavers, which brother is named Norbert?
-	// What occupation do Courage's owners hold?
-	// Who created the Powerpuff Girls? Professor Utonium
+	}, {	
+		question: "What was Tommy's best friend name on the Rugrats",
+		choices: ["Chucky", "wallabe", "Richard", "Brock"],
+		correctChoice: "Chucky"
+	}]
 
-}]
+
 
 
 
@@ -97,52 +125,141 @@ questionArray[questionNumber].correctChoice
 
 
 questionNumber++
-
-
-
 var game = {
-	//variables
-	questionGuessTime: 20,
-	questionNumber: 0,
-	correctAnswers: 0,
-	wrongAnswers: 0,
-	unAnswered: 0,
 
-	//functions
+    // Variables
+    questions: questionsArray, // Import QuestionsArray into the Game Object
+    questionNumber: 0,
+    correctAnswers: 0,
+    wrongAnswers: 0,
+    unAnswered: 0,
+    // currentQuestionNumber: 0,
 
-	timer: functon() {
+    // Functions
+    countdown: function() {
 
-	},
+       timer = setInterval(game.countdown, 1000);
 
-	startGame: functon() {
+    },
+
+    timeUp: function() {
+
+        alert('Time Up!');
+
+    },
+
+    // reset: function() {
+    // 	location.reload()
+
+    // },
+
+    checkGuess: function() {
+
+        // Is this the correct answer for the Question
+
+        // Yes
+
+        // No
+
+        // Is this the last Question?
+        if (this.questionNumber === questionsArray.length - 1) {
+
+        function endGame(isWinner) {
+      		if (correctAnswers > wrongAnswers + unAnswered){
+        		alert('WINNER!');
+      }		
+      		else if( wrongAnswers + unAnswered > correctAnswers){
+        		alert('GAME OVER');
+      };
+    }
+
+        } else {
+
+            // Continue Game
+        }
 
 
-	},
+    },
 
-	reset: functon() {
+    finalResults: function() {
 
 
-	},
+    },
 
-	checkGuess: functon() {
+    loadQuestion: function() {
 
-		questionNumber++
+        // start timer
+        timer = setInterval(game.countdown, 1000);
 
-		if (this.questionNumber === questionsArray.length){
+        // Print Question
+        console.log(this.questions[questionNumber].question)
 
-		}
+        // Print Choices as buttons (for loop needed)
+        console.log(this.questions[questionNumber].choices[0])
+        console.log(this.questions[questionNumber].choices[1])
+        console.log(this.questions[questionNumber].choices[2])
+        console.log(this.questions[questionNumber].choices[3])
+        console.log(this.questions[questionNumber].correctChoice)
 
-	printQuestions: function(){
+    },
 
-	this.timer()
+    nextQuestion: function() {
 
-	console.log(questionsArray[questionNumber].question)
-	console.log(questionsArray[questionNumber].choices[0])
+        // start timer
+        this.timer()
 
-	}
+        // Advance Question Number
+        this.questionNumber++
+
+        // Call loadQuestion() Function
+
+    }
+
 }
 
-game.startGame();
+// var game = {
+// 	//variables
+// 	questionGuessTime: 10,
+// 	questionNumber: 0,
+// 	correctAnswers: 0,
+// 	wrongAnswers: 0,
+// 	unAnswered: 0,
+
+// 	//functions
+
+// 	timer: functon() {
+// 		timer = setInterval(game.countdown, 1000);
+// 	},
+
+// 	startGame: functon() {
+
+
+// 	},
+
+// 	reset: functon() {
+
+
+// 	},
+
+// 	checkGuess: functon() {
+
+// 		questionNumber++
+
+// 		if (this.questionNumber === questionsArray.length){
+
+// 		}
+
+// 	printQuestions: function(){
+
+// 	this.timer()
+
+// 	console.log(questionsArray[questionNumber].question)
+// 	console.log(questionsArray[questionNumber].choices[0])
+
+// 	}
+// }
+
+
 
 </script>
 </body>
