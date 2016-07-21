@@ -11,13 +11,14 @@
 
 //  -->
 
-
+window.onload = function() {
 
 var panel = $('#quiz-area'); // Panel to append all of the HTML to from this JS file
 var countStartNumber = 10; // Global var,
 
 // A function that handles events where one button is clicked
 // Start On Click Here
+
 $(document).on('click', '#start', function() {
     game.startGame();
 
@@ -202,9 +203,11 @@ var game = {
 
         // Call loadQuestion() Function
 
-    }
+        }
 
-}
+    }
+}    
+
 
 // var game = {
 // 	//variables
