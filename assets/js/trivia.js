@@ -169,6 +169,39 @@ var game = {
         game.incorrect++;
         }
     });
+        $.each($("input[name='answer8']:checked"), function () {
+        console.log("inside")
+        if($(this).val() == questionsArray[7].correctChoice) {
+        game.correct++;
+        } else {
+        game.incorrect++;
+        }
+    });
+
+        $.each($("input[name='answer8']:checked"), function () {
+        console.log("inside")
+        if($(this).val() == questionsArray[8].correctChoice) {
+        game.correct++;
+        } else {
+        game.incorrect++;
+        }
+    });
+        $.each($("input[name='answer9']:checked"), function () {
+        console.log("inside")
+        if($(this).val() == questionsArray[9].correctChoice) {
+        game.correct++;
+        } else {
+        game.incorrect++;
+        }
+    });
+        $.each($("input[name='answer10']:checked"), function () {
+        console.log("inside")
+        if($(this).val() == questionsArray[10].correctChoice) {
+        game.correct++;
+        } else {
+        game.incorrect++;
+        }
+    });
     game.result();
   },
         result: function() {
