@@ -194,14 +194,6 @@ var game = {
         game.incorrect++;
         }
     });
-        $.each($("input[name='answer10']:checked"), function () {
-        console.log("inside")
-        if($(this).val() == questionsArray[10].correctChoice) {
-        game.correct++;
-        } else {
-        game.incorrect++;
-        }
-    });
     game.result();
   },
         result: function() {
