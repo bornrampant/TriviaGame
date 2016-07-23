@@ -15,187 +15,169 @@ var countStartNumber = 15; // Global var,
 
 // A function that handles events where one button is clicked
 // Start On Click Here
-
-$(document).on('click', '#start', function() {
-   // game.startGame();
-   game.clicked(e)
-   console.log(this);
-
-}); 
-
+$("#start").click(function() {
+    console.log("Start Game");
+    game.start();
+})
 // Submit On Click
 $(document).on('click', '.check-guess', function(e) {
-     game.checkGuess(e)
-    
-	console.log(e);
-});
+    game.clicked(e);
+})
 // Start Over On Click
 $(document).on('click', '#start-over', function() {
-    location.reload()
-    console.log(this);
+   location.reload()
+});
+$(document).on('click', '#submit', function() {
+    game.done()
 });
 
-// questionNumber = 0;
+    //random question; 4 choices
+    var randomQuestion = Math.floor(Math.random()*(questionsArray));
+    var questionsArray = [{
+    	question: "Which character from Beavis and Butthead got their own show?",
+    	choices: ["Daria", "Hank Hill", "no one", "Beavis"],
+    	correctChoice: "Daria"
+    }, {	
+    	question: "In Fresh Prince of Bel-Air what was the butlers name?",
+    	choices: ["Todd", "Jarvis", "Will", "Gefforey"],
+    	correctChoice: "Gefforey"
+    }, {
+    	question: "What is Doug's last name?",
+    	choices: ["Folders", "Filbert", "Funzie", "Funnie"],
+    	correctChoice: "Funnie"
+    }, {
+    	question: "What kind of animal is Rocko (from Rocko's Modern Life)?",
+    	choices: ["wallabe", "kangaroo", "dog", "catdog"],
+    	correctChoice: "wallabe"
+    }, {	
+    	question: "What's Ren's last name?",
+    	choices: ["Hoeck", "Dog", "Chewie", "Simpson"],
+    	correctChoice: "Hoeck"
+    }, {
+    	question: "What do Pinky and the Brain try to do during every episode?",
+    	choices: ["conquor the world", "eat cheese!", "dance!", "inhabit the cage"],
+    	correctChoice: "conquor the world"
+    }, {
+    	question: "In the Angry Beavers, which brother is named Norbert?",
+    	choices: ["Is this a porno?", "The lighter one", "the darker one", "there is no one with that name, on that show"],
+    	correctChoice: "The lighter one"
+    }, {
+    	question: "What occupation do Courage's owners hold?",
+    	choices: ["Is this a porno?", "Farmers", "the darker one", "there is no one with that name, on that show"],
+    	correctChoice: "Farmers"
+    }, {	
+    	question: "Who created the Powerpuff Girls?",
+    	choices: ["Professor Plutonium", "Professor Utonium", "Professor Oak", "Tina Turner"],
+    	correctChoice: "Professor Utonium"
 
-//start on click
-//submit on click
-game.checkGuess()
-//next button on click
-
-//random question; 4 choices
-// var randomQuestion = Math.floor(Math.random()*(questionsArray));
-// document.getElementById('qtrivia').innerHTML = questionsArray[randomQuestion]
-var questionsArray = [{
-	question: "Which character from Beavis and Butthead got their own show?",
-	choices: ["Daria", "Hank Hill", "no one", "Beavis"],
-	correctChoice: "Daria"
-}, {	
-	question: "In Fresh Prince of Bel-Air what was the butlers name?",
-	choices: ["Todd", "Jarvis", "Will", "Gefforey"],
-	correctChoice: "Gefforey"
-}, {
-	question: "What is Doug's last name?",
-	choices: ["Folders", "Filbert", "Funzie", "Funnie"],
-	correctChoice: "Funnie"
-}, {
-	question: "What kind of animal is Rocko (from Rocko's Modern Life)?",
-	choices: ["wallabe", "kangaroo", "dog", "catdog"],
-	correctChoice: "wallabe"
-}, {	
-	question: "What's Ren's last name?",
-	choices: ["Hoeck", "Dog", "Chewie", "Simpson"],
-	correctChoice: "Hoeck"
-}, {
-	question: "What do Pinky and the Brain try to do during every episode?",
-	choices: ["conquor the world", "eat cheese!", "dance!", "inhabit the cage"],
-	correctChoice: "conquor the world"
-}, {
-	question: "In the Angry Beavers, which brother is named Norbert?",
-	choices: ["Is this a porno?", "The lighter one", "the darker one", "there is no one with that name, on that show"],
-	correctChoice: "The lighter one"
-}, {
-	question: "What occupation do Courage's owners hold?",
-	choices: ["Is this a porno?", "Farmers", "the darker one", "there is no one with that name, on that show"],
-	correctChoice: "Farmers"
-}, {	
-	question: "Who created the Powerpuff Girls?",
-	choices: ["Professor Plutonium", "Professor Utonium", "Professor Oak", "Tina Turner"],
-	correctChoice: "Professor Utonium"
-
-}, {	
-	question: "What was Tommy's best friend name on the Rugrats",
-	choices: ["Chucky", "wallabe", "Richard", "Brock"],
-	correctChoice: "Chucky"
-}]
+    }, {	
+    	question: "What was Tommy's best friend name on the Rugrats",
+    	choices: ["Chucky", "wallabe", "Richard", "Brock"],
+    	correctChoice: "Chucky"
+    }]
 
 
 // Array of Questions
-
-questionArray[questionNumber].question
-questionArray[questionNumber].choices[0]
-questionArray[questionNumber].choices[1]
-questionArray[questionNumber].choices[2]
-questionArray[questionNumber].choices[3]
-questionArray[questionNumber].correctChoice
-
-
-questionNumber++
 var game = {
-
-    // Variables
-    questions: questionsArray, // Imports into the Game Object
-    correctAnswers: 0,
-    wrongAnswers: 0,
-    unAnswered: 0,
-    currentQuestionNumber: 0,
-
-    // Functions
-    countdown: function() {
-        $('#counter-number').html(game.counter);
-        if (game.counter ===0){
-        console.log('Times Up')
-        game.timeUP();
-        }
-       // timer = setInterval(this.countdown, 1500);
-       // countStartNumber--
-
-    },
-
-    timeUp: function() {
-        clearInterval (timer)
-        alert('Times Up!');
-
-    },
-
-    reset: function() {
-    	location.reload()
-
-    },
-
-    checkGuess: function(e) {
-         if ($(e.target).data("name") === questions[this.currentQuestion].correctAnswer){
-          this.answeredCorrectly();
-        } else {
-          this.answeredIncorrectly();
-        }
-
-       // console.log(this.question[questionNumber].correctChoice)
-
-
-    },
-
-    finalResults: function() {
-
-        if (this.questionNumber === questionsArray.length - 1) {
-
-        function endGame(isWinner) {
-            if (correctAnswers > wrongAnswers + unAnswered){
-                alert('WINNER!');
-      }     
-            else if( wrongAnswers + unAnswered > correctAnswers){
-                alert('GAME OVER');
-      };
+  correct:0,
+  incorrect:0,
+  counter:120,
+  countdown: function(){
+    game.counter--;
+    $('#counter-number').html(game.counter);
+    if (game.counter === 0){
+      console.log('TIME UP');
+      game.done();
     }
+  },
+  start: function() {
+    timer = setInterval(game.countdown, 1000);
+    $('#subwrapper').prepend('<h2>Time:<span id="counter-number">120</span> Seconds</h2>');
+    $('#start').remove();
 
-        } else {
-
-            // Continue Game
-        }
-
-
-    },
-
-    loadQuestion: function() {
-
-        // start timer
-        timer = setInterval(game.countdown, 1000);
-
-        // Print Question
-        console.log(this.questions[questionNumber].question)
-
-        // Print Choices as buttons (for loop needed)
-        console.log(this.questions[questionNumber].choices[0])
-        console.log(this.questions[questionNumber].choices[1])
-        console.log(this.questions[questionNumber].choices[2])
-        console.log(this.questions[questionNumber].choices[3])
-        console.log(this.questions[questionNumber].correctChoice)
-
-    },
-
-    nextQuestion: function() {
-
-        // start timer
-        this.timer()
-
-        // Advance Question Number
-        this.questionNumber++
-
-        // Call loadQuestion() Function
-
-        }
-
+   //for each question you will loop and add buttons and display each choice with jquery
+  for(var i=0; i < questionsArray.length; i++) {
+        $('#quiz-area').append('<h2>' + questionsArray[i].question + '</h2>');
+    for(var j=0; j < questionsArray[i].choices.length; j++) {
+        $('#quiz-area').append('<input type="radio" name="answer'+i+'" value="'+questionsArray[i].choices[j]+'"> ' + questionsArray[i].choices[j] );
     }
-   
+  }
+    
+  },
+  done: function() {
+    $.each($("input[name='answer0']:checked"), function () {
+        console.log("inside")
+        if($(this).val() == questionsArray[0].correctChoice) {
+            game.correct++;
+        } else {
+        game.incorrect++;
+        }
+    });
+    $.each($("input[name='answer1']:checked"), function () {
+        console.log("inside")
+        if($(this).val() == questionsArray[1].correctChoice) {
+            game.correct++;
+        } else {
+        game.incorrect++;
+        }
+    });
+        $.each($("input[name='answer2']:checked"), function () {
+        console.log("inside")
+        if($(this).val() == questionsArray[2].correctChoice) {
+            game.correct++;
+        } else {
+        game.incorrect++;
+        }
+    });
+        $.each($("input[name='answer3']:checked"), function () {
+        console.log("inside")
+        if($(this).val() == questionsArray[3].correctChoice) {
+            game.correct++;
+        } else {
+        game.incorrect++;
+        }
+    });
+        $.each($("input[name='answer4']:checked"), function () {
+        console.log("inside")
+        if($(this).val() == questionsArray[4].correctChoice) {
+            game.correct++;
+        } else {
+        game.incorrect++;
+        }
+    });
+        $.each($("input[name='answer5']:checked"), function () {
+        console.log("inside")
+        if($(this).val() == questionsArray[5].correctChoice) {
+            game.correct++;
+        } else {
+        game.incorrect++;
+        }
+    });
+        $.each($("input[name='answer6']:checked"), function () {
+        console.log("inside")
+        if($(this).val() == questionsArray[6].correctChoice) {
+            game.correct++;
+        } else {
+        game.incorrect++;
+        }
+    });
+        $.each($("input[name='answer7']:checked"), function () {
+        console.log("inside")
+        if($(this).val() == questionsArray[7].correctChoice) {
+            game.correct++;
+        } else {
+        game.incorrect++;
+        }
+    });
+    game.result();
+  },
+        result: function() {
+        clearInterval(timer);
+         $("#quiz-area").empty();
+        $("#quiz-area").append("Correct Answers: "+ game.correct + "<br />");
+        $("#quiz-area").append("Incorrect Answers: "+ game.incorrect);
+      }
+  }
 
 
 
