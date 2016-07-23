@@ -27,6 +27,10 @@ body {
     font: #000000 bold;
 }
 
+#quiz-area{
+background: skyblue;
+}
+
 h1{
 	color: #000000;
 	font: bold;
